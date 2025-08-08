@@ -2,17 +2,850 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>College Website</title>
-    <!-- Tailwind CSS CDN for quick start -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dnyandeep Mahavidyalay Palam</title>
+
+    <!-- Tailwind CSS -->
+    <link href="dist/output.css" rel="stylesheet" />
+
+    <style>
+      /* Smooth scrolling */
+      html {
+        scroll-behavior: smooth;
+      }
+
+      /* Marquee styles */
+      .marquee-container {
+        overflow: hidden;
+        position: relative;
+        background-color: #7b1f24; /* Garnet */
+        color: #fbeee6; /* Very light beige */
+        font-weight: 600;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 1rem;
+        height: 2.5rem;
+        display: flex;
+        align-items: center;
+        border-bottom: 3px solid #ff7043;
+        font-variant: small-caps;
+      }
+      @keyframes marquee {
+        0% {
+          transform: translateX(100%);
+        }
+        100% {
+          transform: translateX(-100%);
+        }
+      }
+      .marquee-inner {
+        display: inline-block;
+        white-space: nowrap;
+        will-change: transform;
+        animation: marquee 20s linear infinite;
+      }
+      .marquee-text {
+        padding-right: 4rem;
+        display: inline-block;
+      }
+
+      body {
+        background-color: #f7f0eb;
+        color: #2d2926;
+        font-family: "Inter", sans-serif;
+        scroll-padding-top: 6rem;
+      }
+
+      /* Header */
+      header {
+        background-color: #7b1f24;
+        color: #fbeee6;
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        box-shadow: 0 2px 10px rgb(0 0 0 / 0.15);
+      }
+      nav ul li a {
+        transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+          text-decoration 0.3s ease;
+        position: relative;
+      }
+      nav ul li a:hover,
+      nav ul li a:focus {
+        color: #ff7043;
+        text-decoration: none;
+      }
+      nav ul li a::after {
+        content: "";
+        position: absolute;
+        bottom: -3px;
+        left: 0;
+        width: 0%;
+        height: 2px;
+        background-color: #ff7043;
+        transition: width 0.3s ease;
+        border-radius: 2px;
+      }
+      nav ul li a:hover::after,
+      nav ul li a:focus::after {
+        width: 100%;
+      }
+      .logo-bg {
+        background-color: #fbeee6;
+        color: #7b1f24;
+      }
+      #menu-btn {
+        transition: border-color 0.3s ease, color 0.3s ease;
+      }
+      #menu-btn:hover,
+      #menu-btn:focus {
+        color: #ff7043;
+        border-color: #ff7043;
+        outline-offset: 4px;
+        outline-color: #ff7043;
+      }
+
+      /* Mobile menu fixes */
+      #menu {
+        background-color: #7b1f24;
+        border-radius: 0 0 0.5rem 0.5rem;
+      }
+      #menu li {
+        border-bottom: 1px solid #893235;
+      }
+      #menu li:last-child {
+        border-bottom: none;
+      }
+      #menu li a {
+        display: block;
+        padding: 0.75rem 1rem;
+      }
+
+      /* Hero Section */
+      #hero {
+        background: linear-gradient(135deg, #f5ebe8 0%, #ffe6d8 100%);
+        padding-top: 3.5rem;
+        padding-bottom: 4rem;
+      }
+      #hero h1 {
+        line-height: 1.2;
+        text-shadow: 1px 1px 8px rgb(123 31 36 / 0.25);
+      }
+      #hero p {
+        max-width: 650px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .btn-primary {
+        background-color: #ff7043;
+        color: white;
+        padding: 0.75rem 2rem;
+        border-radius: 0.5rem;
+        font-weight: 700;
+        box-shadow: 0 4px 12px rgb(255 112 67 / 0.4);
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        display: inline-block;
+        user-select: none;
+      }
+      .btn-primary:hover,
+      .btn-primary:focus {
+        background-color: #e74a28;
+        box-shadow: 0 8px 20px rgb(231 74 40 / 0.6);
+        outline: none;
+      }
+      .btn-primary:focus-visible {
+        outline: 3px solid #ff7043;
+        outline-offset: 4px;
+      }
+
+      /* About Section with background image and overlay */
+      #about {
+        position: relative;
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+        border-radius: 1rem;
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        color: #fbeee6;
+      }
+      #about .overlay {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.007);
+        border-radius: 1rem;
+        z-index: 0;
+      }
+      #about .content {
+        position: relative;
+        z-index: 1;
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 0 1rem;
+      }
+      #about h2 {
+        font-variant: small-caps;
+        font-weight: 700;
+        font-family: "serif";
+        font-size: 2rem;
+        margin-bottom: 1rem;
+      }
+      #about p {
+        font-size: 1.125rem;
+        line-height: 1.7;
+        margin-bottom: 1rem;
+        color: #f0d9ca;
+      }
+      #about a {
+        color: #ffab91;
+        font-weight: 600;
+        font-size: 1rem;
+        text-decoration: underline;
+        transition: color 0.3s ease;
+      }
+      #about a:hover,
+      #about a:focus {
+        color: #ff7043;
+      }
+
+      /* Courses Section */
+      #courses {
+        background: linear-gradient(135deg, #fff4e6 0%, #fff0d6 100%);
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+        border-radius: 1rem;
+        box-shadow: 0 4px 15px rgb(255 112 67 / 0.1);
+      }
+      #courses h2 {
+        font-variant: small-caps;
+        letter-spacing: 0.05em;
+        text-shadow: 1px 1px 5px rgba(123, 31, 36, 0.1);
+        font-family: "serif";
+        font-weight: 700;
+        font-size: 2.5rem;
+        margin-bottom: 3rem;
+        text-align: center;
+      }
+      .card {
+        background-color: white;
+        border-radius: 1rem;
+        box-shadow: 0 4px 14px rgb(231 111 81 / 0.07);
+        transition: box-shadow 0.3s ease, transform 0.3s ease;
+        padding: 1.8rem;
+        cursor: default;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+      }
+      .card:hover,
+      .card:focus-within {
+        box-shadow: 0 10px 25px rgb(231 111 81 / 0.18);
+        transform: translateY(-6px);
+      }
+      .card h3 {
+        color: #7b1f24;
+        margin-bottom: 0.75rem;
+        font-weight: 700;
+      }
+      .card p {
+        color: #4a3a36;
+        font-size: 0.95rem;
+        line-height: 1.5;
+        flex-grow: 1;
+      }
+
+      /* Notices & Events Section */
+      #notices,
+      #events {
+        background-color: #fff;
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+        border-radius: 1rem;
+        box-shadow: inset 0 4px 20px rgb(255 112 67 / 0.03);
+      }
+      #notices h2,
+      #events h2 {
+        font-variant: small-caps;
+        letter-spacing: 0.1em;
+        font-family: "serif";
+        font-weight: 700;
+        font-size: 2.5rem;
+        margin-bottom: 2.5rem;
+        text-align: center;
+      }
+      #notices-list .card {
+        cursor: default;
+        padding: 1.5rem 1.75rem;
+        border-left: 6px solid #ff7043;
+      }
+      #notices-list .card h3 {
+        font-size: 1.25rem;
+        font-weight: 600;
+      }
+      #notices-list .card p {
+        font-size: 1rem;
+      }
+      #notices-list .card span {
+        font-style: italic;
+        font-size: 0.9rem;
+        color: #9e8783;
+      }
+
+      #events-gallery img {
+        border-radius: 1rem;
+        object-fit: cover;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        width: 100%;
+        height: 12rem;
+      }
+      #events-gallery img:hover,
+      #events-gallery img:focus {
+        transform: scale(1.05);
+        box-shadow: 0 12px 30px rgba(255 112 67 / 0.25);
+        outline: none;
+      }
+
+      /* Footer */
+      footer {
+        background-color: #7b1f24; /* Garnet dark */
+        color: #fbeee6; /* Light beige */
+        padding: 3rem 1.5rem 2rem;
+        text-align: center;
+        font-size: 0.9rem;
+        font-weight: 500;
+      }
+      footer a {
+        color: #ffab91;
+        text-decoration: underline;
+        transition: color 0.3s ease;
+      }
+      footer a:hover,
+      footer a:focus {
+        color: #ff7043;
+      }
+      footer div {
+        margin-top: 1.25rem;
+        font-size: 0.775rem;
+        color: #e1dede;
+      }
+
+      /* Accessibility & Misc */
+      .error-text {
+        color: #b23a3a;
+        font-weight: 700;
+        text-align: center;
+        margin-top: 1rem;
+      }
+      .loading-text {
+        color: #7b1f24;
+        font-weight: 600;
+        text-align: center;
+        margin-top: 1rem;
+        font-style: italic;
+      }
+
+      /* Responsive tweak: reduce marquee font-size on small */
+      @media (max-width: 400px) {
+        .marquee-container {
+          font-size: 0.85rem;
+          height: 2rem;
+        }
+      }
+    </style>
   </head>
-  <body class="bg-gray-50">
-    <header class="p-4 bg-blue-800 text-white text-center">
-      <h1 class="text-2xl font-bold">Welcome to College Website</h1>
+  <body class="min-h-screen flex flex-col">
+    <!-- Marquee Announcement -->
+    <div
+      class="marquee-container"
+      role="region"
+      aria-live="polite"
+      aria-label="Important announcement"
+    >
+      <div class="marquee-inner" aria-hidden="true">
+        <span class="marquee-text"
+          >Admissions Open for 2025-26! Apply now for your dream course at
+          Dnyandeep Mahavidyalay Palam.</span
+        >
+        <span class="marquee-text"
+          >Admissions Open for 2025-26! Apply now for your dream course at
+          Dnyandeep Mahavidyalay Palam.</span
+        >
+      </div>
+    </div>
+
+    <!-- Header & Navigation -->
+    <header>
+      <nav
+        class="container mx-auto flex flex-wrap justify-between items-center py-4 px-4 md:px-6"
+        aria-label="Primary Navigation"
+      >
+        <div class="flex items-center space-x-4 flex-shrink-0">
+          <div
+            class="w-12 h-12 logo-bg rounded-full flex items-center justify-center shadow-md"
+            aria-label="College logo"
+          >
+            <img
+              src="logo 2.png"
+              alt="Dnyandeep Mahavidyalay Logo"
+              class="w-10 h-10 object-contain rounded-full"
+              loading="lazy"
+            />
+          </div>
+          <div
+            class="text-xl sm:text-2xl font-serif font-bold tracking-tight whitespace-nowrap select-none"
+          >
+            Dnyandeep Mahavidyalay Palam
+          </div>
+        </div>
+
+        <button
+          id="menu-btn"
+          class="block md:hidden flex items-center px-3 py-2 border rounded text-[#fbeee6] border-[#fbeee6]"
+          aria-label="Toggle menu"
+          aria-expanded="false"
+          aria-controls="primary-menu"
+          type="button"
+        >
+          <svg
+            class="fill-current h-6 w-6"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
+            <title>Menu</title>
+            <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+          </svg>
+        </button>
+        <ul
+          id="menu"
+          class="hidden md:flex flex-col md:flex-row md:space-x-8 font-semibold text-[#fbeee6] w-full md:w-auto mt-4 md:mt-0"
+          role="menu"
+          aria-label="Primary menu"
+        >
+          <li class="my-2 md:my-0">
+            <a
+              href="#hero"
+              class="block px-4 md:px-0 hover:underline hover:text-[#ff7043]"
+              role="menuitem"
+              aria-current="page"
+              >Home</a
+            >
+          </li>
+          <li class="my-2 md:my-0">
+            <a
+              href="departments-coming-soon.html"
+              class="block px-4 md:px-0 hover:underline hover:text-[#ff7043]"
+              role="menuitem"
+              >Departments</a
+            >
+          </li>
+          <li class="my-2 md:my-0">
+            <a
+              href="#courses"
+              class="block px-4 md:px-0 hover:underline hover:text-[#ff7043]"
+              role="menuitem"
+              >Courses</a
+            >
+          </li>
+          <li class="my-2 md:my-0">
+            <a
+              href="faculty-coming-soon.html"
+              class="block px-4 md:px-0 hover:underline hover:text-[#ff7043]"
+              role="menuitem"
+              >Faculty</a
+            >
+          </li>
+          <li class="my-2 md:my-0">
+            <a
+              href="admissions-coming-soon.html"
+              class="block px-4 md:px-0 hover:underline hover:text-[#ff7043]"
+              role="menuitem"
+              >Admissions</a
+            >
+          </li>
+          <li class="my-2 md:my-0">
+            <a
+              href="#notices"
+              class="block px-4 md:px-0 hover:underline hover:text-[#ff7043]"
+              role="menuitem"
+              >Notices & Events</a
+            >
+          </li>
+          <li class="my-2 md:my-0">
+            <a
+              href="#footer-contact"
+              class="block px-4 md:px-0 hover:underline hover:text-[#ff7043]"
+              role="menuitem"
+              >Contact</a
+            >
+          </li>
+        </ul>
+      </nav>
     </header>
-    <main class="mt-8 text-center">
-      <p class="text-lg">Site under construction.</p>
-    </main>
+
+    <!-- Hero Section -->
+    <section id="hero" class="py-12 md:py-16 bg-[#f5ebe8]">
+      <div
+        class="container mx-auto px-4 sm:px-6 md:px-8 flex flex-col justify-center items-center text-center max-w-4xl"
+      >
+        <h1
+          class="text-4xl md:text-5xl font-serif font-bold text-[#7b1f24] mb-6 leading-tight"
+        >
+          Empowering Minds, Enriching Futures
+        </h1>
+        <p
+          class="text-lg md:text-xl text-[#4a3a36] mb-10 leading-relaxed max-w-xl"
+        >
+          At Dnyandeep Mahavidyalay, we nurture your aspirations by connecting
+          knowledge with purpose and opportunity, helping you forge a path of
+          excellence and impact.
+        </p>
+        <a
+          href="admissions-coming-soon.html"
+          class="btn-primary focus:outline-none focus:ring-4 focus:ring-[#e76f51]"
+          >Admissions Opening Soon</a
+        >
+        <p class="mt-6 text-sm text-[#7b1f24] font-medium italic">
+          Stay tuned and get ready to join our vibrant learning community.
+        </p>
+      </div>
+    </section>
+    <!-- About Section -->
+    <section
+      id="about"
+      style="background-image: url('2.png')"
+      aria-label="About Dnyandeep Mahavidyalay"
+    >
+      <div class="overlay"></div>
+      <div class="content text-center mx-auto max-w-3xl">
+        <h2>About Dnyandeep Mahavidyalay</h2>
+        <p>
+          We are committed to bringing value-based education and holistic growth
+          to every learner in our rural region.
+        </p>
+        <p>
+          Our inspiring faculty guide students with genuine mentorship,
+          balancing tradition and innovation to help each learner thrive.
+        </p>
+        <p>
+          Welcome to a thriving, purpose-driven community focused on curiosity,
+          service, and positive change.
+        </p>
+        <a href="vision-mission.html"
+          >Learn More About Our Vision and Mission &rarr;</a
+        >
+      </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section id="courses" class="py-14">
+      <div class="container mx-auto px-6 max-w-6xl">
+        <h2>Our Courses & Programs</h2>
+        <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+          <div class="card" tabindex="0" aria-label="BA Civil Services course">
+            <h3>BA (Civil Services)</h3>
+            <p>
+              A comprehensive program designed to develop skills and knowledge
+              in BA (Civil Services).
+            </p>
+          </div>
+          <div class="card" tabindex="0" aria-label="BA Yogashastra course">
+            <h3>BA (Yogashastra)</h3>
+            <p>
+              A comprehensive program designed to develop skills and knowledge
+              in BA (Yogashastra).
+            </p>
+          </div>
+          <div
+            class="card"
+            tabindex="0"
+            aria-label="Diploma In Library & Information Science course"
+          >
+            <h3>Diploma In Library & Information Science</h3>
+            <p>
+              A comprehensive program designed to develop skills and knowledge
+              in Diploma In Library & Information Science.
+            </p>
+          </div>
+          <div
+            class="card"
+            tabindex="0"
+            aria-label="MA Public Administration course"
+          >
+            <h3>MA (Public Administration)</h3>
+            <p>
+              A comprehensive program designed to develop skills and knowledge
+              in MA (Public Administration).
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Notices & Events Section -->
+    <section id="notices" class="py-14">
+      <div class="container mx-auto px-6 max-w-5xl">
+        <h2>Latest Notices & Events</h2>
+        <div id="notices-list" class="space-y-6" role="list">
+          <!-- Notices will be dynamically loaded here -->
+          <p id="notices-status" class="loading-text" aria-live="polite">
+            Loading notices...
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Event Gallery Section -->
+    <section id="events" class="bg-[#f5ebe8] py-14">
+      <div class="container mx-auto px-6 max-w-6xl">
+        <h2>Event Gallery</h2>
+        <div
+          id="events-gallery"
+          class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6"
+          role="list"
+          aria-label="Event images gallery"
+        >
+          <!-- Event images will be dynamically loaded here -->
+        </div>
+        <p id="events-status" class="loading-text" aria-live="polite">
+          Loading events...
+        </p>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer-contact">
+      <div
+        class="container mx-auto px-6 max-w-6xl flex flex-wrap justify-between gap-6"
+      >
+        <!-- Contact Info -->
+        <div
+          class="flex-1 min-w-[250px]"
+          tabindex="0"
+          aria-label="Contact information"
+        >
+          <h3 class="text-xl font-semibold mb-4">Contact Us</h3>
+          <address class="not-italic text-sm leading-relaxed">
+            Dnyandeep Mahavidyalay Palam, College Code :- 1368<br />
+            Teacher Colony Puyani Road Palam Tq Palam Dist Parbhani - 431720<br />
+            Email:
+            <a
+              href="mailto:akashkirwale1@gmail.com"
+              class="underline hover:text-[#ff7043]"
+              >akashkirwale1@gmail.com</a
+            ><br />
+            Phone:
+            <a href="tel:+918275716513" class="underline hover:text-[#ff7043]"
+              >+91 8275716513</a
+            ><br />
+            Phone:
+            <a href="tel:+919922545065" class="underline hover:text-[#ff7043]"
+              >+91 9922545065</a
+            >
+          </address>
+        </div>
+
+        <!-- Quick Links -->
+        <div
+          class="flex-1 min-w-[150px]"
+          tabindex="0"
+          aria-label="Quick navigation links"
+        >
+          <h3 class="text-xl font-semibold mb-4">Quick Links</h3>
+          <ul class="space-y-2 text-sm">
+            <li>
+              <a href="#about" class="hover:text-[#ff7043] underline">About</a>
+            </li>
+            <li>
+              <a
+                href="departments-coming-soon.html"
+                class="hover:text-[#ff7043] underline"
+                >Departments</a
+              >
+            </li>
+            <li>
+              <a href="#courses" class="hover:text-[#ff7043] underline"
+                >Courses</a
+              >
+            </li>
+            <li>
+              <a
+                href="faculty-coming-soon.html"
+                class="hover:text-[#ff7043] underline"
+                >Faculty</a
+              >
+            </li>
+            <li>
+              <a
+                href="admissions-coming-soon.html"
+                class="hover:text-[#ff7043] underline"
+                >Admissions</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <!-- Google Map Embed -->
+        <div
+          class="flex-1 min-w-[220px]"
+          tabindex="0"
+          aria-label="Dnyandeep Mahavidyalay location on map"
+        >
+          <h3 class="text-xl font-semibold mb-4">Find Us</h3>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d8227.35074137409!2d76.93311111747009!3d19.00839603628632!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcfd96048a538bf%3A0x738347e21cb7567a!2sTeachers%20Colony%2C%20Palam%2C%20Maharashtra%20431720!5e0!3m2!1sen!2sin!4v1754509991542!5m2!1sen!2sin"
+            width="100%"
+            height="180"
+            style="border: 0; border-radius: 0.5rem"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Dnyandeep Mahavidyalay Location"
+          ></iframe>
+        </div>
+      </div>
+
+      <div class="mt-8 text-center text-xs text-[#ddd] select-none">
+        © 2025 BuildWithInfovion Pune, Maharashtra | Email:
+        <a
+          href="mailto:infovion2025@gmail.com"
+          class="underline hover:text-[#ff7043]"
+          >infovion2025@gmail.com</a
+        >. All rights reserved.
+      </div>
+    </footer>
+
+    <!-- Navigation toggle script -->
+    <script>
+      const btn = document.getElementById("menu-btn");
+      const menu = document.getElementById("menu");
+
+      function toggleMenu() {
+        menu.classList.toggle("hidden");
+        const expanded = btn.getAttribute("aria-expanded") === "true" || false;
+        btn.setAttribute("aria-expanded", !expanded);
+      }
+
+      btn.addEventListener("click", toggleMenu);
+
+      // Close menu on ESC key
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && !menu.classList.contains("hidden")) {
+          toggleMenu();
+          btn.focus();
+        }
+      });
+
+      // Close menu when clicking a menu link (mobile)
+      menu.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          if (!menu.classList.contains("hidden") && window.innerWidth < 768) {
+            toggleMenu();
+          }
+        });
+      });
+    </script>
+
+    <!-- Fetch and display Notices -->
+    <script>
+      // Backend base URL (adjust for production)
+      const BACKEND_URL = "http://localhost:3000";
+
+      async function loadNotices() {
+        const statusElem = document.getElementById("notices-status");
+        const container = document.getElementById("notices-list");
+
+        try {
+          statusElem.textContent = "Loading notices...";
+          statusElem.className = "loading-text";
+          container.innerHTML = "";
+
+          const response = await fetch(`${BACKEND_URL}/api/notices`);
+          if (!response.ok) {
+            throw new Error("Failed to load notices");
+          }
+          const notices = await response.json();
+
+          if (notices.length === 0) {
+            statusElem.textContent = "No notices to display at the moment.";
+            statusElem.className = "error-text";
+            return;
+          }
+
+          statusElem.textContent = "";
+          statusElem.className = "";
+
+          notices.forEach((notice) => {
+            const noticeCard = document.createElement("div");
+            noticeCard.className = "card";
+            noticeCard.setAttribute("role", "listitem");
+            noticeCard.setAttribute("tabindex", "0");
+            noticeCard.innerHTML = `
+              <h3 class="text-xl font-bold text-[#7b1f24] mb-3">${notice.title}</h3>
+              <p class="text-[#4a3a36] mb-2">${notice.description}</p>
+              <span class="block text-xs text-[#aca09b]">Date: ${notice.date}</span>
+            `;
+            container.appendChild(noticeCard);
+          });
+        } catch (error) {
+          console.error("Error loading notices:", error);
+          statusElem.textContent =
+            "Failed to load notices. Please try again later.";
+          statusElem.className = "error-text";
+        }
+      }
+
+      // Fetch and display Event Gallery images
+      async function loadEvents() {
+        const statusElem = document.getElementById("events-status");
+        const container = document.getElementById("events-gallery");
+
+        try {
+          statusElem.textContent = "Loading events...";
+          statusElem.className = "loading-text";
+          container.innerHTML = "";
+
+          const response = await fetch(`${BACKEND_URL}/api/events`);
+          if (!response.ok) {
+            throw new Error("Failed to load events");
+          }
+          const events = await response.json();
+
+          if (events.length === 0) {
+            statusElem.textContent =
+              "No event images to display at the moment.";
+            statusElem.className = "error-text";
+            return;
+          }
+
+          statusElem.textContent = "";
+          statusElem.className = "";
+
+          events.forEach((event) => {
+            const img = document.createElement("img");
+            img.src = event.imageUrl;
+            img.alt = event.title || "Event image";
+            img.loading = "lazy";
+            img.className = "rounded-lg shadow-md object-cover w-full h-48";
+            img.tabIndex = 0;
+            container.appendChild(img);
+          });
+        } catch (error) {
+          console.error("Error loading events:", error);
+          statusElem.textContent =
+            "Failed to load events. Please try again later.";
+          statusElem.className = "error-text";
+        }
+      }
+
+      window.addEventListener("DOMContentLoaded", () => {
+        loadNotices();
+        loadEvents();
+      });
+    </script>
   </body>
 </html>

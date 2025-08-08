@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Vision & Mission - Dnyandeep Mahavidyalay Palam</title>
+    <link href="dist/output.css" rel="stylesheet" />
+    <style>
+      /* Custom colors matching site branding */
+      :root {
+        --color-garnet: #7b1f24;
+        --color-coral-red: #ff7043;
+        --color-light-beige: #fbeee6;
+        --color-gray-dark: #2d2926;
+        --color-gray-soft: #4a3a36;
+        --color-gray-muted: #6b5d5a;
+        --color-bg-light: #f7f0eb;
+      }
+
+      /* Apply smooth scrolling for anchor links */
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: var(--color-bg-light);
+        color: var(--color-gray-dark);
+        min-height: 100vh;
+        margin: 0;
+        padding: 0;
+      }
+
+      /* Header styles */
+      header {
+        background-color: var(--color-garnet);
+        color: var(--color-light-beige);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+      }
+
+      nav.container {
+        max-width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo-bg {
+        background-color: var(--color-light-beige);
+        color: var(--color-garnet);
+      }
+
+      /* Logo container and image */
+      .logo-container {
+        width: 4rem;
+        height: 4rem;
+        border-radius: 9999px;
+        box-shadow: 0 4px 8px rgb(123 31 36 / 0.4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      .logo-container img {
+        width: 3.5rem;
+        height: 3.5rem;
+        border-radius: 9999px;
+        object-fit: contain;
+      }
+
+      .site-title {
+        font-family: "Georgia", serif;
+        font-weight: 700;
+        font-size: 1.5rem;
+        margin-left: 0.75rem;
+        user-select: none;
+        white-space: nowrap;
+      }
+
+      /* Navigation with only Home link */
+      #menu {
+        display: flex;
+        flex-direction: row;
+        list-style: none;
+        font-weight: 600;
+        font-size: 1rem;
+        margin: 0;
+        padding: 0;
+      }
+
+      #menu li {
+        margin: 0;
+      }
+
+      #menu a {
+        color: var(--color-light-beige);
+        text-decoration: none;
+        position: relative;
+        padding: 0.25rem 0;
+        transition: color 0.3s ease;
+      }
+
+      #menu a:hover,
+      #menu a:focus-visible {
+        color: var(--color-coral-red);
+        outline: none;
+      }
+
+      /* Underline animation on hover */
+      #menu a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -3px;
+        width: 0;
+        height: 2px;
+        background-color: var(--color-coral-red);
+        border-radius: 2px;
+        transition: width 0.3s ease;
+      }
+
+      #menu a:hover::after,
+      #menu a:focus-visible::after {
+        width: 100%;
+      }
+
+      /* Hide mobile menu button since only one link */
+      #menu-btn {
+        display: none;
+      }
+
+      /* Main content */
+      main.container {
+        max-width: 900px;
+        background-color: white;
+        padding: 2.5rem 2rem;
+        border-radius: 0.75rem;
+        box-shadow: 0 10px 25px rgb(123 31 36 / 0.15);
+        margin: 3rem auto 4rem auto;
+      }
+
+      main h1 {
+        color: var(--color-garnet);
+        font-family: "Georgia", serif;
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        text-align: center;
+      }
+
+      main .section-title {
+        font-family: "Georgia", serif;
+        font-size: 1.75rem;
+        color: var(--color-garnet);
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        border-bottom: 3px solid var(--color-coral-red);
+        padding-bottom: 0.25rem;
+      }
+
+      main p {
+        color: var(--color-gray-soft);
+        font-size: 1.125rem;
+        line-height: 1.7;
+        margin-bottom: 1.25rem;
+        text-align: justify;
+      }
+
+      main p:last-child {
+        margin-bottom: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header & Navigation -->
+    <header>
+      <nav class="container" aria-label="Primary Navigation">
+        <div class="flex items-center">
+          <div class="logo-container logo-bg" aria-label="College logo">
+            <img
+              src="logo 2.png"
+              alt="Dnyandeep Mahavidyalay Logo"
+              loading="lazy"
+              width="56"
+              height="56"
+            />
+          </div>
+          <span class="site-title ml-3 select-none"
+            >Dnyandeep Mahavidyalay Palam</span
+          >
+        </div>
+
+        <ul id="menu" role="menu" aria-label="Primary menu" tabindex="-1">
+          <li role="none">
+            <a href="index.html" role="menuitem" tabindex="-1" class="nav-link"
+              >Home</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="container" role="main">
+      <h1>Vision & Mission</h1>
+
+      <section aria-labelledby="vision-heading">
+        <h2 id="vision-heading" class="section-title">Vision</h2>
+        <p>
+          At Dnyandeep Mahavidyalay Palam, our vision is to become a beacon of
+          value-based education and holistic development for the students of
+          Palam and the surrounding rural region.
+        </p>
+        <p>
+          We are committed to nurturing future-ready individuals who excel
+          academically, live ethically, and serve their communities with
+          dedication and knowledge.
+        </p>
+        <p>
+          Our institution aims to blend traditional wisdom with modern
+          pedagogy—offering unique courses in Civil Services, Yogashastra,
+          Library Science, and Public Administration to empower students for
+          professional as well as personal fulfillment.
+        </p>
+        <p>
+          By fostering a learning environment rooted in inclusivity, integrity,
+          and social upliftment, we strive to ignite the spark of curiosity and
+          lifelong learning in every student, regardless of their background or
+          history.
+        </p>
+      </section>
+
+      <section aria-labelledby="mission-heading">
+        <h2 id="mission-heading" class="section-title">Mission</h2>
+        <p>
+          Our mission at Dnyandeep Mahavidyalay Palam is to deliver
+          high-quality, accessible education that empowers students to achieve
+          academic excellence and personal growth.
+        </p>
+        <p>
+          We aim to create a supportive and inclusive environment where
+          innovative teaching, research, and community engagement thrive.
+        </p>
+        <p>
+          We are dedicated to fostering ethical values, critical thinking, and
+          leadership skills in our students so they can contribute positively to
+          society.
+        </p>
+        <p>
+          Through collaboration with faculty, industry experts, and local
+          communities, we strive to cultivate responsible citizens ready to face
+          the challenges of the modern world.
+        </p>
+      </section>
+    </main>
+  </body>
+</html>

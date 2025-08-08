@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Admin Login - College Website</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      /* Import Google Fonts */
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap");
+
+      /* Reset */
+      * {
+        box-sizing: border-box;
+      }
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        font-family: "Inter", Arial, sans-serif;
+        background: linear-gradient(135deg, #f2ebe8 0%, #d7c7bc 100%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .login-container {
+        background: #fff;
+        padding: 2.5rem 3rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1),
+          0 10px 20px rgba(0, 0, 0, 0.07);
+        width: 350px;
+        max-width: 90vw;
+        text-align: center;
+        animation: fadeInUp 0.6s ease forwards;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .login-container h2 {
+        color: #8a2b27;
+        font-weight: 600;
+        font-size: 1.8rem;
+        margin-bottom: 1.75rem;
+        letter-spacing: 1px;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+      }
+
+      input[type="text"],
+      input[type="password"] {
+        padding: 0.8rem 1rem;
+        font-size: 1rem;
+        border: 1.8px solid #c4b4ae;
+        border-radius: 8px;
+        outline-color: #bb553f;
+        transition: border-color 0.3s ease;
+        font-family: inherit;
+        transition: border-color 0.3s ease;
+      }
+
+      input[type="text"]:focus,
+      input[type="password"]:focus {
+        border-color: #bb553f;
+        box-shadow: 0 0 10px #bb553f44;
+      }
+
+      button[type="submit"] {
+        background-color: #bb553f;
+        color: #fff;
+        font-weight: 700;
+        padding: 0.75rem 1rem;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 1.1rem;
+        letter-spacing: 0.05em;
+        transition: background-color 0.25s ease;
+        box-shadow: 0 4px 8px rgba(187, 85, 63, 0.25);
+      }
+
+      button[type="submit"]:hover:not(:disabled) {
+        background-color: #963d2f;
+        box-shadow: 0 6px 16px rgba(150, 61, 47, 0.35);
+      }
+
+      button[type="submit"]:disabled {
+        background-color: #dfc5bb;
+        cursor: not-allowed;
+        box-shadow: none;
+      }
+
+      .notification {
+        margin-bottom: 1rem;
+        padding: 0.65rem 1rem;
+        border-radius: 6px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        text-align: center;
+        opacity: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: opacity 0.4s ease, max-height 0.4s ease;
+        user-select: none;
+        pointer-events: none;
+      }
+
+      .notification.show {
+        opacity: 1;
+        max-height: 100px;
+        pointer-events: auto;
+      }
+
+      .notification.error {
+        background-color: #fce8e6;
+        color: #b23a3a;
+        border: 1.5px solid #b23a3a;
+      }
+
+      .notification.success {
+        background-color: #e6f4ea;
+        color: #2e7d32;
+        border: 1.5px solid #2e7d32;
+      }
+
+      /* Responsive */
+      @media (max-width: 400px) {
+        .login-container {
+          width: 90vw;
+          padding: 2rem 2rem;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="login-container" role="main" aria-label="Admin Login Form">
+      <h2>Admin Login</h2>
+      <div
+        id="notification"
+        class="notification"
+        aria-live="polite"
+        role="alert"
+      ></div>
+      <form id="login-form" autocomplete="off" novalidate>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          placeholder="Username"
+          autocomplete="username"
+          required
+          aria-required="true"
+          aria-describedby="usernameHelp"
+        />
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Password"
+          autocomplete="current-password"
+          required
+          aria-required="true"
+          aria-describedby="passwordHelp"
+        />
+        <button type="submit">Login</button>
+      </form>
+    </div>
+
+    <script>
+      const BACKEND_URL = "http://localhost:3000";
+      const notification = document.getElementById("notification");
+      const loginForm = document.getElementById("login-form");
+
+      function showNotification(msg, isError = false) {
+        notification.textContent = msg;
+        notification.className =
+          "notification show " + (isError ? "error" : "success");
+        setTimeout(() => {
+          notification.classList.remove("show");
+        }, 4000);
+      }
+
+      loginForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const username = loginForm.username.value.trim();
+        const password = loginForm.password.value;
+
+        if (!username || !password) {
+          showNotification("Please enter username and password.", true);
+          return;
+        }
+
+        const submitBtn = loginForm.querySelector("button[type='submit']");
+        submitBtn.disabled = true;
+
+        try {
+          const response = await fetch(`${BACKEND_URL}/api/admin/login`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ username, password }),
+          });
+
+          const data = await response.json();
+
+          if (!response.ok) {
+            throw new Error(data.error || "Login failed");
+          }
+
+          localStorage.setItem("adminToken", data.token);
+
+          showNotification("Login successful! Redirecting...");
+
+          setTimeout(() => {
+            window.location.href = "/admin.html"; // Adjust path if needed
+          }, 1000);
+        } catch (err) {
+          showNotification(err.message, true);
+        } finally {
+          submitBtn.disabled = false;
+        }
+      });
+    </script>
+  </body>
+</html>
