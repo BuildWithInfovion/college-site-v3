@@ -11,7 +11,7 @@ const MONGO_URI =
     console.log("Connected to MongoDB");
 
     const username = "admin"; // Change if you want
-    const password = "Pass@2025"; // Change to a strong password
+    const password = "admin@2025"; // Change to a strong password
 
     const existingAdmin = await Admin.findOne({ username });
     if (existingAdmin) {
