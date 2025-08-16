@@ -20,8 +20,8 @@ app.use("/api/admin", adminAuthRouter);
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // MongoDB connection URI
-const MONGO_URI =
-  "mongodb+srv://admin:admin%402025@cluster0.qapk6t7.mongodb.net/collegeDB?retryWrites=true&w=majority";
+
+const MONGO_URI = process.env.MONGO_URI;
 
 mongoose
   .connect(MONGO_URI)
