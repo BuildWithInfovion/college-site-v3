@@ -1,18 +1,20 @@
 const express = require("express");
 const multer = require("multer");
-const path = require("path");
-const fs = require("fs");
 const Event = require("../models/Event");
 const authenticateToken = require("../middleware/auth");
+const cloudinary = require("../cloudinary");
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
+
 const router = express.Router();
 
-// Multer storage configuration
-const storage = multer.diskStorage({
-  // Move one folder up from routes to backend root, where uploads/ is located
-  destination: (req, file, cb) =>
-    cb(null, path.join(__dirname, "..", "uploads")),
-  filename: (req, file, cb) =>
-    cb(null, Date.now() + path.extname(file.originalname)),
+// Configure Cloudinary storage for multer
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: "college-events",
+    allowed_formats: ["jpg", "jpeg", "png", "webp"],
+    transformation: [{ width: 1200, height: 800, crop: "limit" }],
+  },
 });
 
 const upload = multer({ storage });
@@ -41,9 +43,9 @@ router.post(
           .status(400)
           .json({ error: "Title and image file are required" });
       }
-      const imageUrl = `${req.protocol}://${req.get("host")}/uploads/${
-        req.file.filename
-      }`;
+      // Cloudinary returns the URL in req.file.path
+      const imageUrl = req.file.path;
+
       const newEvent = new Event({ title, imageUrl, date });
       await newEvent.save();
       res.status(201).json(newEvent);
@@ -54,21 +56,14 @@ router.post(
   }
 );
 
-// Protected DELETE route for deleting an event and its image file
+// Protected DELETE route for deleting an event
 router.delete("/:id", authenticateToken, async (req, res) => {
   try {
     const event = await Event.findByIdAndDelete(req.params.id);
     if (!event) return res.status(404).json({ error: "Event not found" });
 
-    if (event.imageUrl) {
-      const imageFilename = event.imageUrl.split("/uploads/")[1];
-      const imagePath = path.join(__dirname, "..", "uploads", imageFilename);
-      fs.unlink(imagePath, (err) => {
-        if (err) {
-          console.error("Error deleting image file:", err);
-        }
-      });
-    }
+    // Optional: Add Cloudinary image deletion here if required
+
     res.status(204).send();
   } catch (err) {
     console.error("Error deleting event:", err);

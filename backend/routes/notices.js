@@ -4,6 +4,7 @@ const authenticateToken = require("../middleware/auth");
 const router = express.Router();
 
 // Protect all routes so only authorized admins can access
+
 router.get("/", async (req, res) => {
   try {
     const notices = await Notice.find().sort({ date: -1 });
