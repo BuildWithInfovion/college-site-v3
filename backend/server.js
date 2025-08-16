@@ -1,3 +1,5 @@
+require("dotenv").config(); // Add this line at the very top
+
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -20,7 +22,6 @@ app.use("/api/admin", adminAuthRouter);
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // MongoDB connection URI
-
 const MONGO_URI = process.env.MONGO_URI;
 
 mongoose
