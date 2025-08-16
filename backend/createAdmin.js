@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const Admin = require("./models/Admin");
 
 const MONGO_URI =
-  "mongodb+srv://admin:admin%402025@cluster0.qapk6t7.mongodb.net/collegeDB?retryWrites=true&w=majority";
+  "mongodb+srv://admin:admin%402025@cluster0.qapk6t7.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
 (async () => {
   try {
