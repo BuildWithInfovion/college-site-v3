@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const Admin = require("./models/Admin");
 
 const MONGO_URI =
-  "mongodb+srv://admin:admin%402025@cluster0.qapk6t7.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+  "mongodb+srv://admin:admin%402025@cluster0.qapk6t7.mongodb.net/collegeDB?retryWrites=true&w=majority";
 
 (async () => {
   try {
@@ -11,7 +11,7 @@ const MONGO_URI =
     console.log("Connected to MongoDB");
 
     const username = "admin"; // Change if you want
-    const password = "admin@2025"; // Change to a strong password
+    const password = "amin@2025"; // Change to a strong password
 
     const existingAdmin = await Admin.findOne({ username });
     if (existingAdmin) {
